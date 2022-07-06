@@ -17,7 +17,7 @@ import { TypeOrmConfigService } from './database/type-orm-config/type-orm-config
     ItemModule,
     StockModule,
     DatabaseModule,
-    ConfigModule.forRoot({envFilePath: '.env', isGlobal: true}),
+    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
   ],
   controllers: [AppController],

@@ -1,12 +1,15 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { Item } from '../item/item';
 
 @Entity()
 export class Menu {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @Column((type) => Item)
+  @Column()
+  name: string;
+
+  @OneToMany(() => Item, (item: Item) => item.menu)
   items: Item[];
 
   @Column()

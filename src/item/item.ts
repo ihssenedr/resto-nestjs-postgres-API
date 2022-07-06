@@ -1,9 +1,10 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Menu } from 'src/menu/menu.entity';
+import { Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Item {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
   name: string;
@@ -18,8 +19,11 @@ export class Item {
   price: number;
 
   @Column()
-  timeTaken: string;
+  timeTaken?: string;
 
   @Column()
-  prodDetails: string;
+  prodDetails?: string;
+
+  @ManyToOne(() => Menu, (menu: Menu) => menu.items)
+  menu: Menu;
 }
