@@ -1,6 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreateItemDto } from './dto/create-item.dto';
+import { UpdateItemDto } from './dto/update-item.dto';
 import { Item as ItemEntity } from './item';
 import { Item } from './item.interface';
 
@@ -18,7 +20,7 @@ export class ItemService {
     }
   }
 
-  async create(item: Item) {
+  async create(item: Item | CreateItemDto) {
     try {
       return await this.itemRepository.save(item);
     } catch (error) {
@@ -26,7 +28,7 @@ export class ItemService {
     }
   }
 
-  async update(item: Item) {
+  async update(item: Item | UpdateItemDto) {
     try {
       return await this.itemRepository.save(item);
     } catch (error) {
