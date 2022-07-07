@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ItemService } from './item.service';
 import { Item } from './item.interface';
 
@@ -24,5 +32,4 @@ export class ItemController {
   async delete(@Param() id: number): Promise<Item> {
     return this.itemService.delete(id);
   }
-
 }

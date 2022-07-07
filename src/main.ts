@@ -4,7 +4,10 @@ import { ValidationPipe } from './validation.pipe';
 import { ConfigService } from '@nestjs/config';
 import * as bodyParser from 'body-parser';
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true ,bodyParser: true});
+  const app = await NestFactory.create(AppModule, {
+    cors: true,
+    bodyParser: true,
+  });
   const config: ConfigService = app.get(ConfigService);
   app.use(bodyParser.json());
   app.useGlobalPipes(new ValidationPipe());

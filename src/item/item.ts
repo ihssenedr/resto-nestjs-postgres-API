@@ -1,5 +1,11 @@
-import { Menu } from 'src/menu/menu.entity';
-import { Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Menu } from './../menu/menu.entity';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Item {
@@ -24,6 +30,6 @@ export class Item {
   @Column()
   prodDetails?: string;
 
-  @ManyToOne(() => Menu, (menu: Menu) => menu.items)
+  @ManyToOne(() => Menu, (menu: Menu) => menu.items, { onDelete: 'CASCADE' })
   menu: Menu;
 }

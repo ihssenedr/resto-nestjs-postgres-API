@@ -1,4 +1,12 @@
-import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Restaurant } from './../restaurant/restaurant.entity';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Item } from '../item/item';
 
 @Entity()
@@ -9,9 +17,13 @@ export class Menu {
   @Column()
   name: string;
 
-  @OneToMany(() => Item, (item: Item) => item.menu)
+  @OneToMany(() => Item, (item) => item.menu, { onDelete: 'CASCADE' })
   items: Item[];
 
   @Column()
   specialOffer: string;
+  @OneToOne(() => Restaurant, (restaurant) => restaurant.foodCard, {
+    onDelete: 'CASCADE',
+  })
+  restaurant: Restaurant;
 }

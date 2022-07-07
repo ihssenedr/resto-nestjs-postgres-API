@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Menu } from 'src/menu/menu.entity';
 import { Repository } from 'typeorm';
 import { Item as ItemEntity } from './item';
 import { Item } from './item.interface';
@@ -13,7 +12,7 @@ export class ItemService {
   ) {}
   async findAll(): Promise<Item[]> {
     try {
-      return await this.itemRepository.find();
+      return await this.itemRepository.find({ relations: ['menu'] });
     } catch (e) {
       return e;
     }

@@ -1,8 +1,9 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Item } from 'src/item/item';
-import { Menu } from 'src/menu/menu.entity';
+import { Item } from './../../item/item';
+import { Menu } from './../../menu/menu.entity';
+import { Restaurant } from './../../restaurant/restaurant.entity';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
@@ -16,8 +17,9 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       port: parseInt(process.env.DATABASE_PORT, 10),
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
-      entities: [Item, Menu],
-      autoLoadEntities : true,
+      entities: [Item, Menu, Restaurant],
+
+      autoLoadEntities: true,
       synchronize: true, // never use TRUE in production!
     };
   }

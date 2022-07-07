@@ -1,7 +1,7 @@
-import { Item } from 'src/item/item';
+import { Item } from './../item/item';
 
 export interface Menu {
-  id: string;
+  id: number;
   items: Item[];
   specialOffer: string;
 }
