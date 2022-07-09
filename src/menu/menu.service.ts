@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
+import { CreateMenuDTO } from './dto/create-menu.dto';
+import { UpdateMenuDTO } from './dto/update-menu.dto';
 import { Menu as MenuEntity } from './menu.entity';
 import { Menu } from './menu.interface';
 
@@ -19,10 +21,9 @@ export class MenuService {
       return e;
     }
   }
-  async create(menu: Menu): Promise<Menu> {
+  async create(menu: Menu | CreateMenuDTO): Promise<Menu> {
     try {
-      console.log('MenuService.create', menu);
-      return this.menuRepository.save(menu);
+      return await this.menuRepository.save(menu);
     } catch (e) {
       return e;
     }
@@ -35,7 +36,7 @@ export class MenuService {
       return e;
     }
   }
-  async update(id: number, menu: Menu): Promise<Menu> {
+  async update(id: number, menu: Menu | UpdateMenuDTO): Promise<Menu> {
     try {
       console.log('MenuService.update ' + id, menu);
       let toUpdate = await this.menuRepository.findOne({ where: { id: id } });
