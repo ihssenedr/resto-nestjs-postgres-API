@@ -33,8 +33,7 @@ describe('RestaurantService', () => {
     const findAllItems = jest.spyOn(service, 'findAll');
     service.findAll();
     expect(findAllItems).toHaveBeenCalled();
-  }
-  );
+  });
 
   it('should call create with expected params', async () => {
     const createItemSpy = jest.spyOn(service, 'create');
@@ -49,5 +48,5 @@ describe('RestaurantService', () => {
     const id = 1;
     await service.update(id ,item);
     expect(updateItemSpy).toHaveBeenCalledWith(id,item);
-  }
-});
+  });
+})
