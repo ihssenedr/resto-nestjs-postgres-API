@@ -13,11 +13,11 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
 
   public createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
+      url: process.env.DATABASE_URL,
       type: 'postgres',
-      host: process.env.DATABASE_HOST,
-      port: parseInt(process.env.DATABASE_PORT, 10),
-      username: process.env.DATABASE_USER,
-      password: process.env.DATABASE_PASSWORD,
+      ssl: {
+        rejectUnauthorized: false,
+      },
       entities: [Item, Menu, Restaurant, Manager],
 
       autoLoadEntities: true,
