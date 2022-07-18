@@ -9,6 +9,9 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmConfigService } from './database/type-orm-config/type-orm-config.service';
+import { ManagerService } from './manager/manager.service';
+import { ManagerController } from './manager/manager.controller';
+import { ManagerModule } from './manager/manager.module';
 
 @Module({
   imports: [
@@ -17,8 +20,9 @@ import { TypeOrmConfigService } from './database/type-orm-config/type-orm-config
     ItemModule,
     StockModule,
     DatabaseModule,
-    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
+    ConfigModule.forRoot({ envFilePath: ['.env', '.env.prod'], isGlobal: true }),
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
+    ManagerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
