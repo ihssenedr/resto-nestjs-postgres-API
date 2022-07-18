@@ -12,6 +12,8 @@ async function bootstrap() {
   app.use(bodyParser.json());
   app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix('api/v1');
-  await app.listen(process.env.APP_PORT, () => {});
+  const port: number = parseInt(`${process.env.PORT}`) || 3000;
+
+  await app.listen(port);
 }
 bootstrap();
