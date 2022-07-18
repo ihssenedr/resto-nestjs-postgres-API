@@ -20,7 +20,7 @@ import { ManagerModule } from './manager/manager.module';
     ItemModule,
     StockModule,
     DatabaseModule,
-    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
+    ConfigModule.forRoot({ envFilePath: ['.env', '.env.prod'], isGlobal: true }),
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
     ManagerModule,
   ],
