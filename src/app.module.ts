@@ -9,9 +9,8 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmConfigService } from './database/type-orm-config/type-orm-config.service';
-import { ManagerService } from './manager/manager.service';
-import { ManagerController } from './manager/manager.controller';
 import { ManagerModule } from './manager/manager.module';
+import * as Redis from 'ioredis';
 
 @Module({
   imports: [
@@ -25,6 +24,9 @@ import { ManagerModule } from './manager/manager.module';
     ManagerModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, {
+    provide: 'redis',
+    useValue: new Redis(process.env.REDIS_URL),
+  }],
 })
 export class AppModule {}

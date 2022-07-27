@@ -1,0 +1,28 @@
+apiVersion: skaffold/v1
+kind: Config
+metadata:
+  name: dev-nestjs-kubernetes
+build:
+  # local:
+  #   push: false
+  artifacts:
+    - image: registry.gitlab.com/svtslv/public/dev-nestjs
+      context: .
+      docker:
+        dockerfile: dev.Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.*'
+            dest: .
+deploy:
+  # kubeContext: docker-desktop
+  kubectl:
+    flags:
+      global: [--namespace=resto-nestjs-postgres-api-namespace]
+    manifests:
+    - ./k8s/secrets.yaml
+    - ./k8s/postgres.yaml
+    - ./k8s/secrets.yaml
+    - ./k8s/nestjs.yaml
+    - ./k8s/redis.yaml
+
